@@ -51,7 +51,7 @@ Expressions are divided into two main categories: place expressions and value ex
 The following contexts are place expression contexts:
 
   - The left operand of a [compound assignment](https://doc.rust-lang.org/reference/expressions/operator-expr.html#compound-assignment-expressions) expression.
-  - The operand of a unary borrow, raw borrow or dereference operator, please see <https://doc.rust-lang.org/reference/expressions/operator-expr.html>.
+  - The operand of a unary [borrow](https://doc.rust-lang.org/reference/expressions/operator-expr.html#borrow-operators), [raw borrow](https://doc.rust-lang.org/reference/expressions/operator-expr.html#raw-borrow-operators) or [dereference](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-dereference-operator) operator.
   - The operand of a field expression.
   - The indexed operand of an array indexing expression.
   - The operand of any implicit borrow.

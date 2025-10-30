@@ -73,5 +73,7 @@ is reinitialized.
 
 * When applied to a [pointer](https://doc.rust-lang.org/reference/types/pointer.html) it denotes the pointed-to location.
 
+* If the expression is of type &mut T or *mut T, and is either a local variable, a (nested) field of a local variable or is a mutable place expression, then the resulting memory location can be assigned to.
+
 <https://doc.rust-lang.org/nomicon/dot-operator.html>
 

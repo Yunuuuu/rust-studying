@@ -75,11 +75,11 @@ is one that evaluates an expression and ignores its result. As a rule, an
 expression statement's purpose is to trigger the effects of evaluating its
 expression.
 
-The purpose of expression statements is the effect of evaluation, so using it
+The purpose of **expression statement** is the effect of evaluation, so using it
 just to drop the result of evaluation would go against this purpose. This means
-that when an expression statement evaluates a single variable and ignores the
-result, the variable may be considered moved, and its ownership may change after
-the statement is executed.
+that when an **expression statement** evaluates a single variable and ignores
+the result, the variable may be considered moved, and its ownership may change
+after the statement is executed.
 
 As a general rule, the following two statements are functionally equivalent:
 ```rust,ignore

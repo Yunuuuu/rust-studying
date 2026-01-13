@@ -9,11 +9,22 @@ occurrence of a name in one namespace to not conflict with the same name in
 another namespace.
 
 ## Patterns
+[identifier
+patterns](https://doc.rust-lang.org/reference/patterns.html#identifier-patterns)
+bind the value they match to a variable in the [value
+namespace](https://doc.rust-lang.org/reference/names/namespaces.html#r-names.namespaces.kinds).
+
+The variable will **shadow** any variables of the same name in scope. The scope
+of the new binding depends on the context of where the pattern is used (such as
+a `let` binding or a `match` arm).
+
 By default, [identifier
 patterns](https://doc.rust-lang.org/reference/patterns.html#identifier-patterns)
 bind a variable to a copy of or move from the matched value depending on whether
-the matched value implements `Copy`. This can be changed to bind to a reference
-by using the `ref` keyword, or to a mutable reference using `ref mut`.
+the matched value implements
+[Copy](https://doc.rust-lang.org/reference/special-types-and-traits.html#copy).
+This can be changed to bind to a reference by using the `ref` keyword, or to a
+mutable reference using `ref mut`.
 
 ```rust,ignore
 match a {

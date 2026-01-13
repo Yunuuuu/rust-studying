@@ -1,6 +1,7 @@
 # Syntax
 
 ## Namespace
+
 A
 [namespace](https://doc.rust-lang.org/reference/names/namespaces.html#namespaces)
 is a logical grouping of declared names. Names are segregated into separate
@@ -9,6 +10,7 @@ occurrence of a name in one namespace to not conflict with the same name in
 another namespace.
 
 ## Patterns
+
 [identifier
 patterns](https://doc.rust-lang.org/reference/patterns.html#identifier-patterns)
 bind the value they match to a variable in the [value
@@ -63,6 +65,49 @@ if let Some(y) = x {
     // x was automatically derefrenced
     // y was converted to `ref y` and its type is &i32
 }
+```
+
+## Expression statements
+
+>An [expression
+statement](https://doc.rust-lang.org/reference/statements.html#expression-statements)
+is one that evaluates an expression and ignores its result. As a rule, an
+expression statement's purpose is to trigger the effects of evaluating its
+expression.
+
+The purpose of expression statements is the effect of evaluation, so using it
+just to drop the result of evaluation would go against this purpose. This means
+that when an expression statement evaluates a single variable and ignores the
+result, the variable may be considered moved, and its ownership may change after
+the statement is executed.
+
+As a general rule, the following two statements are functionally equivalent:
+```rust,ignore
+EXPRESSION;
+```
+
+and
+```rust,ignore
+let _ = EXPRESSION; // or `drop(EXPRESSION)`
+```
+
+For example:
+
+```rust
+struct PrintOnDrop(&'static str);
+
+impl Drop for PrintOnDrop {
+    fn drop(&mut self) {
+        println!("{}", self.0);
+    }
+}
+
+let moved;
+// No destructor run on assignment.
+moved = PrintOnDrop("Drops when moved");
+println!("Before");
+moved; // Drops now
+println!("After");
 ```
 
 ## Expressions

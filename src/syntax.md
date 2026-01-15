@@ -9,6 +9,16 @@ namespaces based on the kind of entity the name refers to. Namespaces allow the
 occurrence of a name in one namespace to not conflict with the same name in
 another namespace.
 
+## Items
+
+[Items](https://doc.rust-lang.org/reference/items.html) are entirely determined
+at compile-time, generally remain fixed during execution, and may reside in
+read-only memory.
+
+Item names from outer modules are not in scope within a nested module. A
+[path](https://doc.rust-lang.org/reference/paths.html) may be used to refer to
+an item in another module.
+
 ## Patterns
 
 [identifier

@@ -192,3 +192,59 @@ we are calling a function on.
   compile time, it "forgets" it for the purpose of resolving methods. For
   instance, this unsizing step can convert `[i32; 2]` into `[i32]` by
   "forgetting" the size of the array.
+
+## Reference
+
+References come in two kinds:
+
+ - A **shared reference** lets you read but not modify its referent. However,
+you can have as many shared references to a particular value at a time as you
+like.  The expression `&e` yields a shared reference to `e`’s value; if `e` has
+the type `T`, then `&e` has the type `&T`, pronounced “**ref T**.” Shared
+references are `Copy`.
+
+ - If you have a **mutable reference** to a value, you may both read and modify
+the value. However, you may not have any other references of any sort to that
+value active at the same time. The expression `&mut e` yields a mutable
+reference to `e`’s value; you write its type as `&mut T`, which is pronounced
+“**ref mute T**.” Mutable references are not `Copy`.
+
+### Fat pointer
+
+A fat pointer, two-word values carrying the address of some value, along with
+some further information necessary to put the value to use.
+
+ - A reference to a slice is a fat pointer, carrying the starting address of the
+slice and its length
+
+ - A trait object, a reference to a value that implements a certain trait. A
+trait object carries a value’s address and a pointer to the trait’s imple‐
+mentation appropriate to that value, for invoking the trait’s methods.
+
+
+### Reference lifetime
+
+ - If you have a variable `x`, then a reference to `x` must not outlive `x`
+   itself.
+
+ - If you store a reference in a variable `r`, the reference's type must be good
+   for the entire lifetime of the variable, from its initialization until its
+   last use.
+
+
+### Memory Reallocation
+
+A mutable reference to a collection (`&mut Vec<T>`) points to the collection's
+descriptor (the header). This descriptor contains the metadata—**pointer**,
+**length**, and **capacity**—necessary to manage the heap. When you call
+`.push()`, the collection may reallocate its internal heap buffer and update its
+internal pointer to a new location. The mutable reference to the `Vec` remains
+valid throughout this process because it points to the stable descriptor, not
+the shifting heap data itself.
+
+In contrast, a mutable slice (`&mut [T]`) is a fat pointer that points directly
+to the heap data. Because a slice is a fixed-size 'window', it lacks the
+metadata to manage capacity or request more memory. Furthermore, a slice cannot
+`.push()` because resizing the underlying buffer could trigger a reallocation.
+If the data moved, the slice's direct pointer would become a dangling pointer to
+deallocated memory. 

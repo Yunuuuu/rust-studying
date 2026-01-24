@@ -251,10 +251,12 @@ deallocated memory.
 
 ## impl trait
 
-`impl Trait` provides ways to specify unnamed but concrete types that implement
-a specific trait. It can appear in two sorts of places: argument position (where
-it can act as an anonymous type parameter to functions), and return position
-(where it can act as an abstract return type). 
+[impl
+Trait](https://doc.rust-lang.org/reference/types/impl-trait.html#impl-trait)
+provides ways to specify unnamed but concrete types that implement a specific
+trait. It can appear in two sorts of places: argument position (where it can act
+as an anonymous type parameter to functions), and return position (where it can
+act as an abstract return type). 
 
 `impl Trait` in argument position is syntactic sugar for a generic type
 parameter like `<T: Trait>`, except that the type is anonymous and doesn’t

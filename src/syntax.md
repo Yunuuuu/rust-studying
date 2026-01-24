@@ -248,3 +248,27 @@ metadata to manage capacity or request more memory. Furthermore, a slice cannot
 `.push()` because resizing the underlying buffer could trigger a reallocation.
 If the data moved, the slice's direct pointer would become a dangling pointer to
 deallocated memory. 
+
+## impl trait
+
+`impl Trait` provides ways to specify unnamed but concrete types that implement
+a specific trait. It can appear in two sorts of places: argument position (where
+it can act as an anonymous type parameter to functions), and return position
+(where it can act as an abstract return type). 
+
+`impl Trait` in argument position is syntactic sugar for a generic type
+parameter like `<T: Trait>`, except that the type is anonymous and doesn’t
+appear in the `GenericParams` list.
+
+Functions can use `impl Trait` to return an abstract return type. These types
+stand in for another concrete type where the caller may only use the methods
+declared by the specified Trait. Each possible return value from the function
+must resolve to the same concrete type.
+
+If using a generic parameter (e.g., `fn f<T: Bar>(...) -> T`), the caller
+chooses the concrete type, therefore the callee must provide functions with any
+return type that the caller could choose. If using `impl Trait` (e.g., `fn
+f(...) -> impl Bar`), then the callee chooses the concrete type (i.e., the
+compiler infers the concrete type from the function body). Therefore there is
+only ever one concrete type, however, that concrete type is not known to the
+caller, so the caller can only assume the trait bound.

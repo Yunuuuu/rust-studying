@@ -260,7 +260,7 @@ act as an abstract return type).
 
 `impl Trait` in argument position is syntactic sugar for a generic type
 parameter like `<T: Trait>`, except that the type is anonymous and doesn’t
-appear in the `GenericParams` list.
+appear in the [GenericParams](https://doc.rust-lang.org/reference/items/generics.html#generic-parameters) list.
 
 Functions can use `impl Trait` to return an abstract return type. These types
 stand in for another concrete type where the caller may only use the methods
